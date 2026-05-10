@@ -1,0 +1,677 @@
+
+<!DOCTYPE html>
+<html lang="my">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<title>Our Private Cinema ❤️</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#060606;
+    color:white;
+    font-family:'Poppins',sans-serif;
+    overflow-x:hidden;
+}
+
+/* Favorite Button */
+.favorite-btn{
+    position:absolute;
+    top:16px;
+    right:16px;
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:rgba(0,0,0,.45);
+    backdrop-filter:blur(8px);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:20px;
+    z-index:5;
+    transition:.3s;
+}
+
+.favorite-btn:hover{
+    transform:scale(1.1);
+    background:rgba(255,90,130,.85);
+}
+
+.favorite-btn.active{
+    background:#ff5a82;
+    box-shadow:0 0 20px rgba(255,90,130,.5);
+}
+
+/* Luxury Background */
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+    linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.92)),
+    url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=1600&auto=format&fit=crop');
+    background-size:cover;
+    background-position:center;
+    z-index:-3;
+    transform:scale(1.1);
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    backdrop-filter:blur(12px);
+    z-index:-2;
+}
+
+/* Floating lights */
+.light{
+    position:fixed;
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    background:rgba(255,215,160,.7);
+    box-shadow:0 0 30px rgba(255,215,160,.9);
+    animation:float 10s linear infinite;
+    z-index:-1;
+}
+
+@keyframes float{
+    from{
+        transform:translateY(100vh) scale(.5);
+        opacity:0;
+    }
+    to{
+        transform:translateY(-120px) scale(1.2);
+        opacity:1;
+    }
+}
+
+/* Header */
+header{
+    position:sticky;
+    top:0;
+    z-index:999;
+    background:rgba(10,10,10,.35);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:22px 35px;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.logo{
+    font-family:'Cormorant Garamond',serif;
+    font-size:40px;
+    font-weight:700;
+    color:#ffd6a5;
+    letter-spacing:1px;
+}
+
+.search-wrapper{
+    display:flex;
+    justify-content:center;
+    padding:0 35px 22px;
+}
+
+.search-box{
+    width:100%;
+    max-width:700px;
+}
+
+.search-box input{
+    width:100%;
+    padding:15px 22px;
+    border:none;
+    border-radius:50px;
+    background:rgba(255,255,255,.08);
+    color:white;
+    outline:none;
+    font-size:15px;
+    transition:.3s;
+}
+
+.search-box input:focus{
+    background:rgba(255,255,255,.12);
+    box-shadow:0 0 0 3px rgba(255,214,165,.18);
+}
+
+/* Hero */
+.hero{
+    min-height:88vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:50px 20px;
+}
+
+.hero-content{
+    max-width:950px;
+}
+
+.hero h1{
+    font-family:'Cormorant Garamond',serif;
+    font-size:92px;
+    line-height:1;
+    margin-bottom:25px;
+    color:#fff4e6;
+}
+
+.hero h1 span{
+    color:#ffd6a5;
+}
+
+.hero p{
+    color:#dddddd;
+    line-height:1.9;
+    font-size:18px;
+    max-width:760px;
+    margin:auto;
+}
+
+.hero button{
+    margin-top:40px;
+    padding:16px 40px;
+    border:none;
+    border-radius:60px;
+    background:linear-gradient(135deg,#ffd6a5,#ff9f7f);
+    color:#111;
+    font-weight:700;
+    font-size:15px;
+    cursor:pointer;
+    transition:.35s;
+    box-shadow:0 15px 40px rgba(255,170,120,.35);
+}
+
+.hero button:hover{
+    transform:translateY(-5px) scale(1.04);
+}
+
+/* Love Note */
+.note{
+    width:92%;
+    max-width:950px;
+    margin:0 auto 70px;
+    padding:35px;
+    border-radius:35px;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(16px);
+    text-align:center;
+    line-height:2;
+    color:#f2f2f2;
+    font-size:16px;
+}
+
+.note h2{
+    font-family:'Cormorant Garamond',serif;
+    color:#ffd6a5;
+    font-size:42px;
+    margin-bottom:12px;
+}
+
+/* Section */
+/* Top Action Buttons */
+.top-actions{
+    display:flex;
+    gap:15px;
+    padding:0 35px 25px;
+    flex-wrap:wrap;
+}
+
+.fav-view-btn{
+    padding:12px 22px;
+    border:none;
+    border-radius:50px;
+    background:rgba(255,255,255,.08);
+    color:white;
+    cursor:pointer;
+    font-size:14px;
+    transition:.3s;
+    backdrop-filter:blur(10px);
+}
+
+.fav-view-btn:hover{
+    background:#ff7fa8;
+}
+
+
+.section-title{
+    padding:0 35px;
+    margin-bottom:28px;
+    font-family:'Cormorant Garamond',serif;
+    font-size:42px;
+    color:#ffe3c1;
+}
+    padding:0 35px;
+    margin-bottom:28px;
+    font-family:'Cormorant Garamond',serif;
+    font-size:42px;
+    color:#ffe3c1;
+}
+
+/* Movie Grid */
+.movie-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,220px));
+    justify-content:flex-start;
+    gap:28px;
+    padding:0 35px 70px;
+}
+
+.movie-card{
+    width:220px;
+    display:block;
+}
+
+.movie-card{
+    position:relative;
+    overflow:hidden;
+    border-radius:32px;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+    transition:.4s;
+    cursor:pointer;
+}
+
+.movie-card:hover{
+    transform:translateY(-14px) scale(1.02);
+    box-shadow:0 25px 60px rgba(255,180,120,.22);
+}
+
+.movie-card img{
+    width:100%;
+    height:360px;
+    object-fit:cover;
+    display:block;
+}
+
+.overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to top,rgba(0,0,0,.95),transparent 60%);
+    opacity:0;
+    transition:.35s;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.movie-card:hover .overlay{
+    opacity:1;
+}
+
+.play-btn{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    background:rgba(255,255,255,.15);
+    backdrop-filter:blur(12px);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:34px;
+    border:1px solid rgba(255,255,255,.2);
+}
+
+.movie-info{
+    padding:22px;
+}
+
+.movie-info h3{
+    font-size:18px;
+    margin-bottom:8px;
+}
+
+.movie-info span{
+    color:#d9d9d9;
+    font-size:13px;
+}
+
+/* Modal */
+#videoModal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.96);
+    z-index:9999;
+}
+
+.modal-content{
+    width:95%;
+    max-width:1150px;
+    margin:40px auto;
+    position:relative;
+}
+
+.close-btn{
+    position:absolute;
+    top:-65px;
+    right:0;
+    font-size:55px;
+    cursor:pointer;
+}
+
+#playerContainer iframe{
+    width:100%;
+    height:650px;
+    border:none;
+    border-radius:28px;
+    background:black;
+}
+
+footer{
+    padding:50px 20px;
+    text-align:center;
+    color:#bdbdbd;
+    font-size:14px;
+}
+
+/* Mobile */
+@media(max-width:768px){
+
+.hero h1{
+    font-size:52px;
+}
+
+.hero{
+    min-height:70vh;
+}
+
+.note h2{
+    font-size:34px;
+}
+
+.movie-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+    padding:0 16px 40px;
+}
+
+.movie-card{
+    width:100%;
+}
+
+
+.movie-card img{
+    height:240px;
+}
+
+#playerContainer iframe{
+    height:250px;
+}
+
+.section-title{
+    padding:0 18px;
+    font-size:34px;
+}
+
+.navbar{
+    padding:18px;
+}
+
+}
+</style>
+</head>
+<body>
+
+
+
+<div class="light" style="left:10%;animation-delay:0s"></div>
+<div class="light" style="left:28%;animation-delay:2s"></div>
+<div class="light" style="left:46%;animation-delay:5s"></div>
+<div class="light" style="left:66%;animation-delay:1s"></div>
+<div class="light" style="left:86%;animation-delay:4s"></div>
+
+<header>
+<div class="navbar">
+
+<div class="logo">Our Cinema ❤️</div>
+
+</div>
+
+<div class="search-wrapper">
+<div class="search-box">
+<input type="text" id="searchBar" placeholder="Search our favorite movie..." onkeyup="searchMovies()">
+</div>
+</div>
+</header>
+
+<section class="hero">
+<div class="hero-content">
+
+<h1>
+A Little <span>World</span><br>
+Made For You
+</h1>
+
+<p>
+ဒီ website လေးက မင်းအတွက်ပဲ ❤️<br>
+မင်းစိတ်ညစ်တဲ့နေ့တွေမှာဖြစ်ဖြစ် ပျော်တဲ့နေ့တွေမှာဖြစ်ဖြစ်
+ဒီထဲက movie လေးတွေကြည့်ပြီး စိတ်ချမ်းသာစေချင်လို့။
+</p>
+
+<button onclick="window.scrollTo({top:900,behavior:'smooth'})">
+Enter Our Cinema 🎬
+</button>
+
+</div>
+</section>
+
+<div class="note">
+<h2>To My Favorite Person ❤️</h2>
+
+ဒီနေရာလေးက မင်းတစ်ယောက်ထဲအတွက်ပါ။<br>
+Movie တစ်ကားချင်းစီတိုင်းမှာ မင်းနဲ့အတူကြည့်ချင်တဲ့ feeling လေးတွေ ထည့်ထားတယ်။<br>
+တစ်နေ့ကျရင် ဒီထဲကကားတွေကို မင်းဘေးမှာထိုင်ပြီး အတူကြည့်ချင်တယ်။
+</div>
+
+<div class="top-actions">
+<button class="fav-view-btn" onclick="showFavorites()">❤️ Favorites</button>
+<button class="fav-view-btn" onclick="showAllMovies()">🎬 All Movies</button>
+</div>
+
+<h2 class="section-title">✨ Movies For You</h2>
+
+<div id="movie-list" class="movie-grid">
+Loading Movies...
+</div>
+
+<div id="videoModal">
+<div class="modal-content">
+<span class="close-btn" onclick="closeVideo()">×</span>
+<div id="playerContainer"></div>
+</div>
+</div>
+
+<footer>
+Made With Love ❤️
+</footer>
+
+<script>
+const blogUrl = "naing60.blogspot.com";
+
+function fetchMovies() {
+    const script = document.createElement('script');
+    script.src = `https://${blogUrl}/feeds/posts/default?alt=json-in-script&callback=processData&max-results=500`;
+    document.body.appendChild(script);
+}
+
+function processData(data) {
+    const entries = data.feed.entry || [];
+    let html = "";
+
+    if(entries.length === 0) {
+        document.getElementById('movie-list').innerHTML = 'No movies found';
+        return;
+    }
+
+    entries.forEach(entry => {
+        const title = entry.title.$t;
+        const content = entry.content.$t;
+
+        const imgUrl = entry.media$thumbnail
+            ? entry.media$thumbnail.url.replace('s72-c','s1600')
+            : 'https://via.placeholder.com/300x450';
+
+        const regex = /https:\/\/drive\.google\.com\/file\/d\/[^\"]+\/preview/g;
+        const match = content.match(regex);
+        const videoUrl = match ? match[0] : '';
+
+        html += `
+        <div class="movie-card" onclick="openVideo('${videoUrl}')">
+
+            <div class="favorite-btn" onclick="toggleFavorite(event, this)">♡</div>
+
+            <img src="${imgUrl}" alt="${title}">
+
+            <div class="overlay">
+                <div class="play-btn">▶</div>
+            </div>
+
+            <div class="movie-info">
+                <h3>${title}</h3>
+                <span>Watch Together ❤️</span>
+            </div>
+
+        </div>
+        `;
+    });
+
+    document.getElementById('movie-list').innerHTML = html;
+    loadFavorites();
+}
+
+function openVideo(url) {
+    if(!url) {
+        alert('Video not found');
+        return;
+    }
+
+    const container = document.getElementById('playerContainer');
+
+    container.innerHTML = `
+        <iframe
+            src="${url}"
+            allow="autoplay; fullscreen"
+            allowfullscreen>
+        </iframe>
+    `;
+
+    document.getElementById('videoModal').style.display = 'block';
+}
+
+function closeVideo() {
+    document.getElementById('videoModal').style.display = 'none';
+    document.getElementById('playerContainer').innerHTML = '';
+}
+
+function searchMovies() {
+    const input = document.getElementById('searchBar').value.toLowerCase();
+    const cards = document.querySelectorAll('.movie-card');
+
+    cards.forEach(card => {
+        const title = card.querySelector('h3').innerText.toLowerCase();
+
+        if(title.includes(input)) {
+            card.style.display = '';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+
+function toggleFavorite(event, btn) {
+    event.stopPropagation();
+
+    btn.classList.toggle('active');
+
+    const card = btn.closest('.movie-card');
+    const title = card.querySelector('h3').innerText;
+
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    if(btn.classList.contains('active')) {
+        btn.innerHTML = '❤';
+
+        if(!favorites.includes(title)) {
+            favorites.push(title);
+        }
+    } else {
+        btn.innerHTML = '♡';
+        favorites = favorites.filter(fav => fav !== title);
+    }
+
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+}
+
+function loadFavorites() {
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    const cards = document.querySelectorAll('.movie-card');
+
+    cards.forEach(card => {
+        const title = card.querySelector('h3').innerText;
+        const favBtn = card.querySelector('.favorite-btn');
+
+        if(favorites.includes(title)) {
+            favBtn.classList.add('active');
+            favBtn.innerHTML = '❤';
+        }
+    });
+}
+
+function showFavorites() {
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    const cards = document.querySelectorAll('.movie-card');
+
+    cards.forEach(card => {
+        const title = card.querySelector('h3').innerText;
+
+        if(favorites.includes(title)) {
+            card.style.display = '';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+
+function showAllMovies() {
+    const cards = document.querySelectorAll('.movie-card');
+
+    cards.forEach(card => {
+        card.style.display = '';
+    });
+}
+
+window.onload = fetchMovies;
+
+window.onclick = function(e) {
+    const modal = document.getElementById('videoModal');
+
+    if(e.target === modal) {
+        closeVideo();
+    }
+};
+</script>
+
+</body>
+</html>
+

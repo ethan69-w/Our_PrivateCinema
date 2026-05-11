@@ -199,7 +199,6 @@ header{
     background:rgba(255,255,255,.08);
     color:white;
     cursor:pointer;
-    backdrop-filter:blur(10px);
 }
 
 /* Categories */
@@ -278,8 +277,6 @@ header{
     font-size:32px;
 }
 
-/* Movie Info */
-
 .movie-info{
     padding:20px;
 }
@@ -334,7 +331,7 @@ header{
     cursor:pointer;
 }
 
-/* VIDEO PLAYER FIXED FOR SAFARI */
+/* VIDEO */
 
 #videoSection{
     position:fixed;
@@ -352,19 +349,10 @@ header{
 
     padding:20px;
 
-    z-index:2147483647;
-
-    -webkit-backface-visibility:hidden;
-    backface-visibility:hidden;
-
-    transform:translateZ(0);
-
-    -webkit-transform:translateZ(0);
+    z-index:999999;
 }
 
 .video-container{
-    position:relative;
-
     width:100%;
     max-width:1100px;
 
@@ -373,12 +361,6 @@ header{
     border-radius:25px;
 
     overflow:hidden;
-
-    z-index:2147483647;
-
-    transform:translateZ(0);
-
-    -webkit-transform:translateZ(0);
 }
 
 #moviePlayer{
@@ -390,34 +372,30 @@ header{
     display:block;
 
     background:black;
-
-    position:relative;
-
-    z-index:2147483647;
-
-    transform:translateZ(0);
-
-    -webkit-transform:translateZ(0);
 }
 
+/* CLOSE BUTTON */
+
 .close-video-btn{
-    position:absolute;
+    position:fixed;
 
-    top:15px;
-    right:15px;
+    top:20px;
+    right:20px;
 
-    padding:10px 18px;
+    padding:12px 20px;
 
     border:none;
     border-radius:50px;
 
-    background:rgba(0,0,0,.75);
+    background:rgba(0,0,0,.85);
 
     color:white;
 
+    font-size:15px;
+
     cursor:pointer;
 
-    z-index:2147483647;
+    z-index:999999999;
 }
 
 /* Footer */
@@ -472,10 +450,10 @@ footer{
 }
 
 .close-video-btn{
-    top:10px;
-    right:10px;
+    top:12px;
+    right:12px;
 
-    padding:8px 14px;
+    padding:10px 16px;
 
     font-size:13px;
 }
@@ -536,7 +514,7 @@ Enter Our Cinema 🎬
 
 <h2>To My Favorite Person ❤️</h2>
 
-တစ်‌နေ့ကျရင် ကိုယ်တို့နှစ်ယောက်အတူ<br>ဒီထဲက ဇာတ်ကားလေးတွေကို အတူကြည့်<br>နိုင်အောင် ကြိုးစားကြမယ် ❤️
+တစ်နေ့ကျရင် ကိုယ်တို့နှစ်ယောက်အတူ<br>ဒီထဲက ဇာတ်ကားလေးတွေကို အတူ<br>ကြည့်နိုင်အောင် ကြိုးစားကြမယ်နော် ❤️
 
 </div>
 
@@ -559,11 +537,11 @@ Loading Movies...
 
 <div id="videoSection">
 
-<div class="video-container">
-
 <button class="close-video-btn" onclick="closeVideo()">
 ✕ Close
 </button>
+
+<div class="video-container">
 
 <iframe
 id="moviePlayer"
@@ -798,20 +776,18 @@ function openVideo(url){
 
     if(!url){
 
-        alert("It's Locked ❤️\n\nဤရုပ်ရှင်အား ကြည့်ရှုနိုင်ရန်\nသင့်ကောင်လေးအား အာဘွားပေး၍\nUnlock လုပ်ပါ...");
+        alert("It's Locked ❤️\n\nဤရုပ်ရှင်အား ကြည့်ရှုနိုင်ရန်\nသင့်ကောင်လေးအား အာဘွားပေး၍ \nUnlock လုပ်ပါ...");
 
         return;
     }
-
-    const player =
-    document.getElementById("moviePlayer");
 
     document.getElementById("videoSection")
     .style.display = "flex";
 
     setTimeout(() => {
 
-        player.src = url;
+        document.getElementById("moviePlayer")
+        .src = url;
 
     },100);
 }
